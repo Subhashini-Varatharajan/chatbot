@@ -1,0 +1,49 @@
+<header
+class="py-3 px-4 px-xs-1.5 d-flex flex-wrap bg-white position-absolute align-items-center justify-content-between top-0 end-0 left-auto">
+<div class="d-flex flex-wrap align-items-center">
+
+  <span class="ng-cs-home fn30"></span>
+ <ng-container *ngFor="let i of pathHead ; let j = index">
+
+ <ng-container *ngIf="j != pathHead.length-1 ">
+  <ion-icon name="chevron-forward-outline" class="mx-1"></ion-icon>
+  <a href="javascript:void(0)" class="semibold">{{i}}</a>
+  </ng-container>
+
+   <ng-container *ngIf="j == pathHead.length-1">
+  <ion-icon name="chevron-forward-outline" class="mx-1"></ion-icon>
+  <a href="javascript:void(0)" class="semibold lineheight-0 text-extra-dark-gray">{{i}}</a>
+
+   </ng-container>
+</ng-container>
+</div>
+<div class="dropdown me-3">
+  <button class="dropdown-toggle rounded-10 ps-sm-4 ps-1.5" type="button" id="tenant" data-bs-toggle="dropdown"
+    aria-expanded="false">
+    <span>Tenant : </span>
+    <!-- <p class="extrabold">{{Dsply}}</p> -->
+    <p class="extrabold" *ngIf="Dsply == '' ">Select Tenant</p>
+    <p class="extrabold" *ngIf="Dsply != '' ">{{Dsply}}</p>
+    <em class="bi bi-chevron-down ms-3"></em>
+  </button>
+  <ul class="dropdown-menu px-1.5 py-1.5 shadow-blue rounded-10 max-h-260 radio-wrapper" aria-labelledby="tenant">
+    
+     <li class="position-sticky top-0 bg-white" style="z-index: 9999">
+      <div>
+        <input type="search" id="search" class="border-0 w-100 h-100 py-2 px-3 bg-light-white rounded-9 bold fn15"
+          placeholder="Search" [(ngModel)]="SearchData" />
+      </div>
+    </li>
+    <li class="mt-1" *ngFor="let i of tenants | searchTenant:SearchData ">
+      <a class="dropdown-item" href="javascript:void(0)">
+        <label class="radio-btn position-unset">
+          <input type="radio" name="tenant-radio" class="dropdown-input" [value]="i"  (change)="onChange($event)"/>
+          <span></span>
+          <p class="text-gray fn15 ms-2">{{i}}</p>
+        </label>
+      </a>
+    </li>
+    
+  </ul>
+</div>
+</header>
